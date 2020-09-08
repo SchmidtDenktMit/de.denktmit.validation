@@ -10,6 +10,7 @@ import javax.validation.Validator;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.extractor.Extractors.toStringMethod;
 
 class UpperCaseValidatorTest {
 
@@ -54,20 +55,28 @@ class UpperCaseValidatorTest {
     }
 
     @Test
-    void testAnnotatedValidationSucceedsWithAllAllowedCharacters() {
+    void testAnnotatedValidationFailsWithAllAllowedCharacters() {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<Sample>> violations = validator.validate(new Sample(DISALLOWED_CHARACTERS));
         assertThat(violations)
             .hasOnlyElementsOfType(ConstraintViolation.class)
-            .hasSize(1)
-            .first().extracting("propertyPath").hasToString("someString");
+            .hasSize(3)
+            .extracting("propertyPath")
+            .extracting(toStringMethod())
+            .contains("a", "b", "c");
     }
 
     private static class Sample{
         @UpperCase
-        private final String someString;
-        private Sample(String someString) {
-            this.someString = someString;
+        private final String a;
+        @UpperCase
+        private final CharSequence b;
+        @UpperCase
+        private final StringBuffer c;
+        private Sample(String value) {
+            this.a = value;
+            this.b = value;
+            this.c = new StringBuffer(value);
         }
     }
 

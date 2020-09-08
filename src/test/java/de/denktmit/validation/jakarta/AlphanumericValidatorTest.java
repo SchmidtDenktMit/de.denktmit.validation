@@ -9,6 +9,7 @@ import javax.validation.Validator;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.extractor.Extractors.toStringMethod;
 
 class AlphanumericValidatorTest {
 
@@ -58,15 +59,23 @@ class AlphanumericValidatorTest {
         Set<ConstraintViolation<Sample>> violations = validator.validate(new Sample(DISALLOWED_CHARACTER_SAMPLES));
         assertThat(violations)
             .hasOnlyElementsOfType(ConstraintViolation.class)
-            .hasSize(1)
-            .first().extracting("propertyPath").hasToString("someString");
+            .hasSizeGreaterThanOrEqualTo(3)
+            .extracting("propertyPath")
+            .extracting(toStringMethod())
+            .contains("a", "b", "c");
     }
 
     private static class Sample{
         @Alphanumeric
-        private final String someString;
-        private Sample(String someString) {
-            this.someString = someString;
+        private final String a;
+        @Alphanumeric
+        private final CharSequence b;
+        @Alphanumeric
+        private final StringBuffer c;
+        private Sample(String value) {
+            this.a = value;
+            this.b = value;
+            this.c = new StringBuffer(value);
         }
     }
 
