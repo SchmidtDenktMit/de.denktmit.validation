@@ -11,6 +11,13 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * The annotated element must only contain non-alphabetic or upper case alphabetic characters of ASCII range A - Z.
+ *
+ * @author Marius Schmidt
+ * @since 1.0.0
+ *
+ */
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = LowerCaseValidator.class)

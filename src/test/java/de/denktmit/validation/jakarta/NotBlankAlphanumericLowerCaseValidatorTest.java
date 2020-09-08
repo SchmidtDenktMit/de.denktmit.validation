@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NotBlankLowerCaseAlphanumericValidatorTest {
+class NotBlankAlphanumericLowerCaseValidatorTest {
 
     private static final String ALLOWED_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789";
     private static final String DISALLOWED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ    ^°„“!\"§$%&/()=?´``“¶¢[]|{}≠¿'  üöä+#ÜÖÄ*'±‘æœ•@-.,_:;–…∞—÷˛»„≥‡";
@@ -59,7 +59,7 @@ class NotBlankLowerCaseAlphanumericValidatorTest {
     }
 
     private static class Sample{
-        @NotBlankLowerCaseAlphanumeric
+        @NotBlankAlphanumericLowerCase
         private final String someString;
         private Sample(String someString) {
             this.someString = someString;

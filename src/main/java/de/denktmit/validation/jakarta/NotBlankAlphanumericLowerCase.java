@@ -11,15 +11,15 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @NotBlank
-@LowerCase
 @Alphanumeric
+@LowerCase
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, TYPE_USE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
-public @interface NotBlankLowerCaseAlphanumeric {
+public @interface NotBlankAlphanumericLowerCase {
 
-    String message() default "{io.gec.constraints.notblank_lowercase_alphanumeric}";
+    String message() default "{io.gec.constraints.notblank_alphanumeric_lowercase}";
 
     Class<?>[] groups() default { };
 

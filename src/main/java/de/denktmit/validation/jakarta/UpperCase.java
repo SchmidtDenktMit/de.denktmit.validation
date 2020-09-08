@@ -1,6 +1,6 @@
 package de.denktmit.validation.jakarta;
 
-import de.denktmit.validation.jakarta.validators.AlphanumericValidator;
+import de.denktmit.validation.jakarta.validators.UpperCaseValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,7 +12,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * The annotated element must only contain characters of ASCII range a - z, A - Z or 0 - 9.
+ * The annotated element must only contain non-alphabetic or upper case alphabetic characters of ASCII range A - Z.
  *
  * @author Marius Schmidt
  * @since 1.0.0
@@ -20,11 +20,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = AlphanumericValidator.class)
+@Constraint(validatedBy = UpperCaseValidator.class)
 @Documented
-public @interface Alphanumeric {
+public @interface UpperCase {
 
-    String message() default "{io.gec.constraints.alphanumeric}";
+    String message() default "{io.gec.constraints.lowercase}";
 
     Class<?>[] groups() default {};
 

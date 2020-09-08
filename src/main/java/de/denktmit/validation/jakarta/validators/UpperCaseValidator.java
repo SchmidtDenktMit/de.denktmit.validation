@@ -1,14 +1,14 @@
 package de.denktmit.validation.jakarta.validators;
 
-import de.denktmit.validation.jakarta.LowerCase;
+import de.denktmit.validation.jakarta.UpperCase;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public final class LowerCaseValidator implements ConstraintValidator<LowerCase, String> {
+public class UpperCaseValidator implements ConstraintValidator<UpperCase, String> {
 
-    private static final byte ASCII_VALUE_A = 65;
-    private static final byte ASCII_VALUE_Z = 90;
+    private static final byte ASCII_VALUE_a = 97;
+    private static final byte ASCII_VALUE_z = 122;
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -16,11 +16,10 @@ public final class LowerCaseValidator implements ConstraintValidator<LowerCase, 
             return true;
         }
         for (byte aByte : value.getBytes()) {
-            if (aByte >= ASCII_VALUE_A && aByte <= ASCII_VALUE_Z) {
+            if (aByte >= ASCII_VALUE_a && aByte <= ASCII_VALUE_z) {
                 return false;
             }
         }
         return true;
     }
-
 }
